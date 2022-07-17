@@ -16,7 +16,7 @@ const getDiffActivityDate = (activityDate) => {
 
 module.exports = NodeHelper.create({
   start: function () {
-    console.info("MMM-Garmin started!");
+    console.info("MMM-GConnect started!");
   },
   socketNotificationReceived: async function (notification, payload) {
     const self = this;
