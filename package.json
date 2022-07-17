@@ -1,0 +1,13 @@
+{
+  "name": "MMM-GConnect",
+  "version": "1.0.0",
+  "description": "Magic Mirror² module to display sports data from Garmin Connect.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thomas Derflinger",
+  "license": "MIT",
+  "dependencies": {
+    "garmin-connect": "1.4.3"
+  }
+}
