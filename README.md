@@ -99,7 +99,7 @@ Preact: https://preactjs.com
 
 HTM: https://github.com/developit/htm
 
-Garmin Connect: https://connect.garmin.com/
+Garmin Connect™: https://connect.garmin.com/
 
 Thanks to the great work of Pythe1337N in creating the `garmin-connect` JavaScript library.
 Without his work, this module would not have been possible.
