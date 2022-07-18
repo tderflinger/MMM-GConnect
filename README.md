@@ -1,7 +1,7 @@
 # Magic Mirror² GConnect
 
 This is a [`Magic Mirror²`](https://magicmirror.builders/) module that displays data from the most recent activity loggged
-in your Garmin Connect account.
+in your Garmin Connect™ account.
 
 Specifically, it displays the following data:
 - days since your last sports activity
@@ -9,7 +9,7 @@ Specifically, it displays the following data:
 - total time of last sports activity
 - average heart rate of last sports activity
 
-In order to use this module, you need to have a [`Garmin Connect`](https://connect.garmin.com/) account. You can configure
+In order to use this module, you need to have a [`Garmin Connect™`](https://connect.garmin.com/) account. You can configure
 your username and password in the `config.js` file as specified below.
 
 Note: This project is not affiliated with the Garmin company.
@@ -18,7 +18,7 @@ Note: This project is not affiliated with the Garmin company.
 
 This is an example of how Magic Mirror² GConnect looks in my configuration:
 
-![Magic Mirror² Garmin exmaple screen](./doc/screenshot-MMM-GConnect.png)
+![Magic Mirror² GConnect exmaple screen](./doc/screenshot-MMM-GConnect.png)
 
 ## Installation
 
@@ -72,9 +72,9 @@ Finally, edit your configuration file under `config/config.js` with the followin
 ## Config Options
 | **Option**        | **Description** |
 | --- | --- |
-| `interval`      | Interval between new fetch of data from Garmin Connect in ms |
-| `loginName`      | Your login name to Garmin Connect |
-| `password`      | Your password to Garmin Connect |
+| `interval`      | Interval between new fetch of data from Garmin Connect™ in ms |
+| `loginName`      | Your login name to Garmin Connect™ |
+| `password`      | Your password to Garmin Connect™ |
 
 ## Testing
 
