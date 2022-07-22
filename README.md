@@ -38,24 +38,6 @@ cd /home/pi/MagicMirror/modules/MMM-GConnect
 npm i
 ```
 
-Next, you need to go into the `vendor` folder of your Magic Mirror² installation and install the following two libraries:
-
-```
-cd /home/pi/MagicMirror/vendor
-npm i preact@10.10.0 --save
-npm i htm@3.1.1 --save
-```
-
-These libraries ([Preact](https://preactjs.com) and [HTM](https://github.com/developit/htm)) are required for the module to work. Additionally, you need to add these two properties to the
-vendor object in the `vendor/vendor.js` file:
-
-```
-	"preact.js": "node_modules/preact/dist/preact.min.js",
-	"htm.js": "node_modules/htm/dist/htm.js"
-```
-
-This makes the [Preact](https://preactjs.com) and [HTM](https://github.com/developit/htm) libraries available to the module.
-
 Finally, edit your configuration file under `config/config.js` with the following configuration.
 ```
 {	

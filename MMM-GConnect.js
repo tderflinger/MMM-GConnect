@@ -3,13 +3,16 @@ let currentData = {};
 Module.register("MMM-GConnect", {
   defaults: {
     loginName: null,
-    password: null,
+    password: null
   },
   start: function () {
     this.getData();
   },
   getScripts: function () {
-    return ["preact.js", "htm.js"];
+    return [
+      this.file("node_modules/preact/dist/preact.min.js"),
+      this.file("node_modules/htm/dist/htm.js")
+    ];
   },
   getDom: () => {
     const { h, render } = preact;
@@ -151,5 +154,5 @@ Module.register("MMM-GConnect", {
       default:
     }
     this.updateDom();
-  },
+  }
 });
