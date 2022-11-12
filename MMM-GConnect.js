@@ -18,7 +18,7 @@ Module.register("MMM-GConnect", {
     const { h, render } = preact;
     const html = htm.bind(h);
 
-    const GarminWidget = ({ diffDays, distance, time, hr }) => {
+    const GarminWidget = ({ diffDays, distance, time, hr, activityType }) => {
       const diffColor = diffDays > 3 ? "red" : "white";
 
       // taken from https://iconduck.com/icons/12253/running International Attribution License
@@ -87,7 +87,7 @@ Module.register("MMM-GConnect", {
           <p
             style="font-size: 2rem; color: white; padding: 0; margin: 0; margin-left: 0.5rem"
           >
-            Running
+            ${activityType}
           </p>
         </div>
         <div style="display: inline-flex; gap: 1.5rem">
@@ -135,6 +135,7 @@ Module.register("MMM-GConnect", {
         distance=${currentData.lastActivityDistance}
         time=${currentData.lastActivityTime}
         speed=${currentData.lastActivityAvgSpeed}
+        activityType=${currentData.activityType}
       />`,
       divElement
     );
