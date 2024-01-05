@@ -35,15 +35,14 @@ module.exports = NodeHelper.create({
         const lastActivityAvgHR =
           Math.round(activities[0].averageHR * 100) / 100;
         const diff = getDiffActivityDate(lastActivityDate);
-        const activityType = activities[0].activityType?.typeKey;
-        const majorActivityType = activityType.charAt(0).toUpperCase()+activityType.slice(1);
+        const activityType = activities[0].activityName;
         self.sendSocketNotification("UPDATE_GARMIN_DATA", {
           diff,
           lastActivityDistance,
           lastActivityTime,
           lastActivityAvgSpeed,
           lastActivityAvgHR,
-          activityType: majorActivityType,
+          activityType,
         });
         break;
       default:

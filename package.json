@@ -8,7 +8,7 @@
   "author": "Thomas Derflinger",
   "license": "MIT",
   "dependencies": {
-    "garmin-connect": "1.4.3",
+    "garmin-connect": "1.6.0",
     "htm": "3.1.1",
     "preact": "10.10.0"
   },

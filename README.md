@@ -51,6 +51,8 @@ Finally, edit your configuration file under `config/config.js` with the followin
 },
 ```
 
+You also have to add your login credentials to the `garmin.config.js` file.
+
 ## Config Options
 | **Option**        | **Description** |
 | --- | --- |
