@@ -22,7 +22,7 @@ Note: This project is not affiliated with the Garmin company.
 
 This is an example of how Magic Mirror² GConnect looks in my configuration:
 
-![Magic Mirror² GConnect exmaple screen](./doc/screenshot-MMM-GConnect.png)
+![Magic Mirror² GConnect exmaple screen](./doc/screenshot-MMM-GConnect-Up.png)
 
 ## Installation
 
