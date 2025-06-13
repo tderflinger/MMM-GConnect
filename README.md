@@ -75,6 +75,13 @@ Finally, edit your configuration file under `config/config.js` with the followin
 | `showMap`      | Boolean, set to true to show a map of the route |
 | `mapTilerKey`      | API key of the MapTiler map service. Only needed when you want to show a map. |
 
+## TCX Files Wanted
+
+In order to thoroughly test and make the application more robust, I am looking for TCX file donations.
+Please remove all private data. The TCX file is only used to test the functionality of the application.
+
+Are you interested? Please contact me.
+
 ## Testing
 
 I have tested the `Magic Mirror² GConnect` module on an Raspberry Pi 3B with Raspberry OS
