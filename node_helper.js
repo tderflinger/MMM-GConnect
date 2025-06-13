@@ -1,5 +1,7 @@
 const NodeHelper = require("node_helper");
 const { GarminConnect } = require("garmin-connect");
+const { exec } = require('child_process');
+const fs = require('fs');
 
 const getLastActivityDate = (activities) => {
   const lastActivity = activities[0];
@@ -36,14 +38,59 @@ module.exports = NodeHelper.create({
           Math.round(activities[0].averageHR * 100) / 100;
         const diff = getDiffActivityDate(lastActivityDate);
         const activityType = activities[0].activityName;
-        self.sendSocketNotification("UPDATE_GARMIN_DATA", {
-          diff,
-          lastActivityDistance,
-          lastActivityTime,
-          lastActivityAvgSpeed,
-          lastActivityAvgHR,
-          activityType,
-        });
+        const showMap = payload?.showMap || false;
+
+        if (showMap) {
+          const mapTilerKey = payload?.mapTilerKey;
+          await GCClient.downloadOriginalActivityData({ activityId: activities[0].activityId }, `${this.path}/data`, 'tcx');
+
+          const arch = process.arch;
+          const isArm = arch.startsWith('arm') || arch === 'arm64';
+
+          exec(`${this.path}/bin/tcx-ls${isArm ? '-arm' : ''} ${this.path}/data/${activities[0].activityId}.tcx --geojson ${this.path}/data/${activities[0].activityId}.json`, (error, _, stderr) => {
+              if (error) {
+                console.error(`Error executing tcx-ls: ${error}`);
+                return;
+              }
+              if (stderr) console.error(`Command stderr: ${stderr}`);
+
+              // Read the generated JSON file
+              const jsonFilePath = `${this.path}/data/${activities[0].activityId}.json`;
+              if (!fs.existsSync(jsonFilePath)) {
+                console.error(`GeoJSON file not found: ${jsonFilePath}`);
+                return;
+              }
+
+              try {
+                const geoJsonData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
+
+                self.sendSocketNotification("UPDATE_GARMIN_DATA", {
+                  diff,
+                  lastActivityDistance,
+                  lastActivityTime,
+                  lastActivityAvgSpeed,
+                  lastActivityAvgHR,
+                  activityType,
+                  mapTilerKey,
+                  geoJsonData,
+                  showMap,
+                });
+            } catch (parseError) {
+              console.error(`Error reading or parsing JSON file: ${parseError}`);
+            }
+          });
+         } else {
+          self.sendSocketNotification("UPDATE_GARMIN_DATA", {
+            diff,
+            lastActivityDistance,
+            lastActivityTime,
+            lastActivityAvgSpeed,
+            lastActivityAvgHR,
+            activityType,
+            showMap,
+          });
+        }
+
         break;
       default:
         console.error("Switch item {} is missing", notification);

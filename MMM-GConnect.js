@@ -1,4 +1,5 @@
 let currentData = {};
+let map;
 
 Module.register("MMM-GConnect", {
   defaults: {
@@ -11,14 +12,20 @@ Module.register("MMM-GConnect", {
   getScripts: function () {
     return [
       this.file("node_modules/preact/dist/preact.min.js"),
-      this.file("node_modules/htm/dist/htm.js")
+      this.file("node_modules/htm/dist/htm.js"),
+      'https://unpkg.com/maplibre-gl@5.5.0/dist/maplibre-gl.js'
     ];
+  },
+  getStyles: function() {
+	  return [
+		'https://unpkg.com/maplibre-gl@5.5.0/dist/maplibre-gl.css',
+	  ]
   },
   getDom: () => {
     const { h, render } = preact;
     const html = htm.bind(h);
 
-    const GarminWidget = ({ diffDays, distance, time, hr, activityType }) => {
+    const GarminWidget = ({ diffDays, distance, time, hr, activityType, showMap }) => {
       const diffColor = diffDays > 3 ? "red" : "white";
 
       // taken from https://iconduck.com/icons/12253/running International Attribution License
@@ -123,11 +130,14 @@ Module.register("MMM-GConnect", {
             </div>
           </div>
         </div>
+        ${showMap
+          ? html`<div id="map" style="width: 500px; height: 500px">
+          <p>Loading map...</p></div>`
+          : ""}
       </div>`;
     };
 
     const divElement = document.createElement("div");
-
     render(
       html`<${GarminWidget}
         diffDays=${currentData.diff}
@@ -136,9 +146,46 @@ Module.register("MMM-GConnect", {
         time=${currentData.lastActivityTime}
         speed=${currentData.lastActivityAvgSpeed}
         activityType=${currentData.activityType}
+        showMap=${currentData.showMap}
       />`,
       divElement
     );
+
+    if (currentData?.showMap) {
+      setTimeout(() => {
+        if (currentData?.mapTilerKey) {
+          const startingCoordinateLat = currentData?.geoJsonData?.features?.[0]?.geometry?.coordinates?.[currentData?.geoJsonData?.features?.[0]?.geometry?.coordinates?.length-1]?.[0];
+          const startingCoordinateLng = currentData?.geoJsonData?.features?.[0]?.geometry?.coordinates?.[currentData?.geoJsonData?.features?.[0]?.geometry?.coordinates?.length-1]?.[1];
+          map = new maplibregl.Map({
+            container: 'map', // container id
+            style:
+                `https://api.maptiler.com/maps/streets/style.json?key=${currentData?.mapTilerKey}`,
+            center: [startingCoordinateLat, startingCoordinateLng], // starting position
+            zoom: 12 // starting zoom
+          });
+        }
+      }, 1500);
+
+      setTimeout(() => {
+        if (map && map.isStyleLoaded() && currentData?.geoJsonData) {
+          map.addSource('geojson-source', {
+              'type': 'geojson',
+              'data': currentData.geoJsonData,
+          });
+
+          map.addLayer({
+              'id': 'uploaded-polygons',
+              'type': 'line',
+              'source': 'geojson-source',
+              'paint': {
+                  'line-color': 'red',
+                  'line-width': 3,
+              },
+          });
+        }
+      }, 8000);
+    }
+
     return divElement;
   },
   getData: function () {
@@ -155,5 +202,6 @@ Module.register("MMM-GConnect", {
       default:
     }
     this.updateDom();
+
   }
 });

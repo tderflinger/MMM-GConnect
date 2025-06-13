@@ -1,4 +1,6 @@
 {
 	"username": "your username",
-	"password": "your password"
+	"password": "your password",
+	"showMap": true,
+	"mapTilerKey": "your maptiler key"
 }

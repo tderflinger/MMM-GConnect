@@ -8,9 +8,9 @@
   "author": "Thomas Derflinger",
   "license": "MIT",
   "dependencies": {
-    "garmin-connect": "1.6.0",
+    "garmin-connect": "1.6.2",
     "htm": "3.1.1",
-    "preact": "10.10.0"
+    "preact": "10.26.9"
   },
   "repository": "github:tderflinger/MMM-GConnect"
 }

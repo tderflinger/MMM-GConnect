@@ -1,4 +1,4 @@
-# Magic Mirror² GConnect
+# Magic Mirror² MMM-GConnect
 
 This is a [`Magic Mirror²`](https://magicmirror.builders/) module that displays data from the most recent activity loggged
 in your Garmin Connect™ account.
@@ -8,6 +8,10 @@ Specifically, it displays the following data:
 - total distance of last sports activity
 - total time of last sports activity
 - average heart rate of last sports activity
+
+Optionally, you can also enable a vector map that shows the route of the last activity. The map
+uses the [MapLibre](https://maplibre.org) web map library and the [MapTiler](https://www.maptiler.com) map service. In order to show a map you
+must register with MapTiler and obtain an API key. The API key is free for a fixed amount of usage per month.
 
 In order to use this module, you need to have a [`Garmin Connect™`](https://connect.garmin.com/) account. You can configure
 your username and password in the `config.js` file as specified below.
@@ -38,6 +42,15 @@ cd /home/pi/MagicMirror/modules/MMM-GConnect
 npm i
 ```
 
+You will also need to set execution right of the tcx-ls or tcx-ls-arm binary that is located in the `MMM-GConnect` directory under the `bin` folder.
+
+```bash
+cd modules/MMM-GConnect/bin
+chmod +x ./tcx-ls-arm
+```
+
+This binary is only needed when showing a map. It is used for converting the TCX file downloaded from Garmin Connect to a GeoJSON file that is then displayed on the map.
+
 Finally, edit your configuration file under `config/config.js` with the following configuration.
 ```
 {	
@@ -45,13 +58,13 @@ Finally, edit your configuration file under `config/config.js` with the followin
   position: "top_left",
   config: {
     interval: 60000000,
-    loginName: "your login name",
-    password: "your login password",
+    loginName: "Your login name",
+    password: "Your login password",
+    showMap: true,
+    mapTilerKey: "Your API key",
   },
 },
 ```
-
-You also have to add your login credentials to the `garmin.config.js` file.
 
 ## Config Options
 | **Option**        | **Description** |
@@ -59,11 +72,13 @@ You also have to add your login credentials to the `garmin.config.js` file.
 | `interval`      | Interval between new fetch of data from Garmin Connect™ in ms |
 | `loginName`      | Your login name to Garmin Connect™ |
 | `password`      | Your password to Garmin Connect™ |
+| `showMap`      | Boolean, set to true to show a map of the route |
+| `mapTilerKey`      | API key of the MapTiler map service. Only needed when you want to show a map. |
 
 ## Testing
 
 I have tested the `Magic Mirror² GConnect` module on an Raspberry Pi 3B with Raspberry OS
-and Node 16.15.0 and `Magic Mirror²` version 2.19.0.
+and Node 22 and `Magic Mirror²` version 2.31.0.
 
 ## Icons
 
@@ -84,6 +99,12 @@ Preact: https://preactjs.com
 HTM: https://github.com/developit/htm
 
 Garmin Connect™: https://connect.garmin.com/
+
+MapLibre: https://maplibre.org
+
+MapTiler: https://www.maptiler.com
+
+Tcx-ls: https://github.com/tderflinger/tcx-ls
 
 Thanks to the great work of Pythe1337N in creating the `garmin-connect` JavaScript library.
 Without his work, this module would not have been possible.
