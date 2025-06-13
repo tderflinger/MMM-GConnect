@@ -52,7 +52,7 @@ chmod +x ./tcx-ls-arm
 This binary is only needed when showing a map. It is used for converting the TCX file downloaded from Garmin Connect to a GeoJSON file that is then displayed on the map.
 
 Finally, edit your configuration file under `config/config.js` with the following configuration.
-```json
+```
 {	
   module: "MMM-GConnect",
   position: "top_left",
