@@ -30,14 +30,14 @@ Clone this repository into your MagicMirror `modules` folder.
 
 Example:
 
-```
+```bash
 cd /home/pi/MagicMirror/modules
 git clone https://github.com/tderflinger/MMM-GConnect.git
 ```
 
 Install the JavaScript dependencies:
 
-```
+```bash
 cd /home/pi/MagicMirror/modules/MMM-GConnect
 npm i
 ```
@@ -45,14 +45,14 @@ npm i
 You will also need to set execution right of the tcx-ls or tcx-ls-arm binary that is located in the `MMM-GConnect` directory under the `bin` folder.
 
 ```bash
-cd modules/MMM-GConnect/bin
+cd /home/pi/MagicMirror/modules/MMM-GConnect/bin
 chmod +x ./tcx-ls-arm
 ```
 
 This binary is only needed when showing a map. It is used for converting the TCX file downloaded from Garmin Connect to a GeoJSON file that is then displayed on the map.
 
 Finally, edit your configuration file under `config/config.js` with the following configuration.
-```
+```json
 {	
   module: "MMM-GConnect",
   position: "top_left",
