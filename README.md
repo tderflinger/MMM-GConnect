@@ -66,6 +66,8 @@ Finally, edit your configuration file under `config/config.js` with the followin
 },
 ```
 
+You can get the MapTiler API key by registering on the [MapTiler website](https://www.maptiler.com) and going to "API Keys" on the left menu. It is free for a certain amount of invokations per month.
+
 ## Config Options
 | **Option**        | **Description** |
 | --- | --- |
@@ -74,6 +76,9 @@ Finally, edit your configuration file under `config/config.js` with the followin
 | `password`      | Your password to Garmin Connect™ |
 | `showMap`      | Boolean, set to true to show a map of the route |
 | `mapTilerKey`      | API key of the MapTiler map service. Only needed when you want to show a map. |
+
+Note that in case you use the map feature and have a lot of activity, the `data` folder within MMM-GConnect might fill up with downloaded TCX and GeoJSON activity files. Consider purging that
+folder from time to time.
 
 ## TCX Files Wanted
 
