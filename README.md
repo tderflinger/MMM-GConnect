@@ -1,5 +1,7 @@
 # Magic Mirror² MMM-GConnect
 
+[[Español]](./README-es.md)
+
 This is a [`Magic Mirror²`](https://magicmirror.builders/) module that displays data from the most recent activity loggged
 in your Garmin Connect™ account.
 
