@@ -11,8 +11,7 @@ kaydedilen en son etkinlikten verileri görüntüleyen bir [``Magic Mirror²``](
 - son spor faaliyetinin toplam süresi
 - son spor aktivitesinin ortalama kalp atış hızı
 
-İsteğe bağlı olarak, son etkinliğin rotasını gösteren bir vektör haritasını da etkinleştirebilirsiniz. haritası [MapLibre](https://maplibre.org) web harita kütüphanesini ve [MapTiler](https://www.maptiler.com) harita hizmetini kullanır. Bir harita göstermek için
-MapTiler'a kaydolmalı ve bir API anahtarı edinmelisiniz. API anahtarı aylık sabit bir kullanım miktarı için ücretsizdir.
+İsteğe bağlı olarak, son etkinliğin rotasını gösteren bir vektör haritasını da etkinleştirebilirsiniz. Harita, [MapLibre](https://maplibre.org) web harita kütüphanesini ve [MapTiler](https://www.maptiler.com) harita hizmetini kullanır. Bir harita göstermek için MapTiler'a kaydolmanız ve bir API anahtarı edinmeniz gerekir. API anahtarı aylık sabit bir kullanım miktarı için ücretsizdir.
 
 Bu modülü kullanabilmek için bir [`Garmin Connect™`](https://connect.garmin.com/) hesabınızın olması gerekir. kullanıcı adınızı ve şifrenizi `config.js` dosyasında aşağıda belirtildiği gibi yapılandırabilirsiniz.
 

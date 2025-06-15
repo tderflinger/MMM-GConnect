@@ -12,8 +12,7 @@ Specifically, it displays the following data:
 - average heart rate of last sports activity
 
 Optionally, you can also enable a vector map that shows the route of the last activity. The map
-uses the [MapLibre](https://maplibre.org) web map library and the [MapTiler](https://www.maptiler.com) map service. In order to show a map you
-must register with MapTiler and obtain an API key. The API key is free for a fixed amount of usage per month.
+uses the [MapLibre](https://maplibre.org) web map library and the [MapTiler](https://www.maptiler.com) map service. In order to show a map you must register with MapTiler and obtain an API key. The API key is free for a fixed amount of usage per month.
 
 In order to use this module, you need to have a [`Garmin Connect™`](https://connect.garmin.com/) account. You can configure
 your username and password in the `config.js` file as specified below.
