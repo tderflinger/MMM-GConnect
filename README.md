@@ -1,3 +1,5 @@
+![MMM-GConnect logo](./doc/MMM-GConnect-logo.png)
+
 # Magic Mirror² MMM-GConnect
 
 [[Español]](./README-es.md) [[Türkçe]](./README-tr.md)
