@@ -1,6 +1,7 @@
 const NodeHelper = require("node_helper");
 const { GarminConnect } = require("garmin-connect");
 const { exec } = require('child_process');
+const path = require('path');
 const fs = require('fs');
 
 const getLastActivityDate = (activities) => {
@@ -15,6 +16,37 @@ const getDiffActivityDate = (activityDate) => {
   const diff = Math.round((today - activityDateDate) / (1000 * 60 * 60 * 24));
   return diff;
 };
+
+const getTcxLSPath = (modulePath) => {
+  const arch = process.arch;
+  const platform = process.platform;
+
+  const binPath = path.join(modulePath, "bin");
+  let fileName;
+
+  if (platform === "linux" && arch === "arm64") {
+    fileName = "tcx-ls-linux-arm64";
+  }
+  if (platform === "linux" && arch === "x64") {
+    fileName = "tcx-ls-linux-x86_64";
+  }
+  if (platform === "darwin" && arch === "arm64") {
+    fileName = "tcx-ls-macos-arm64";
+  }
+  if (platform === "darwin" && arch === "x64") {
+    fileName = "tcx-ls-macos-x86_64";
+  }
+  if (platform === "win32") {
+    fileName = "tcx-ls-windows-x86_64.exe";
+  }
+
+  if (!fileName) {
+    throw new Error(`Unsupported platform/arch: ${platform}/${arch}`);
+  }
+
+  return path.join(binPath, fileName);
+};
+
 
 module.exports = NodeHelper.create({
   start: function () {
@@ -44,10 +76,11 @@ module.exports = NodeHelper.create({
           const mapTilerKey = payload?.mapTilerKey;
           await GCClient.downloadOriginalActivityData({ activityId: activities[0].activityId }, `${this.path}/data`, 'tcx');
 
-          const arch = process.arch;
-          const isArm = arch.startsWith('arm') || arch === 'arm64';
+          const tcxLsPath = getTcxLSPath(this.path);
+          const tcxPath = path.join(this.path, 'data', `${activities[0].activityId}.tcx`);
+          const jsonPath  = path.join(this.path, 'data', `${activities[0].activityId}.json`);
 
-          exec(`${this.path}/bin/tcx-ls${isArm ? '-arm' : ''} ${this.path}/data/${activities[0].activityId}.tcx --geojson ${this.path}/data/${activities[0].activityId}.json`, (error, _, stderr) => {
+          exec(`${tcxLsPath} ${tcxPath} --geojson ${jsonPath}`, (error, _, stderr) => {
               if (error) {
                 console.error(`Error executing tcx-ls: ${error}`);
                 return;
